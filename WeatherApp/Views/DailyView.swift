@@ -16,7 +16,8 @@ struct DailyView: View{
             ForEach(viewModel.dailyData) {model in
               
                 DayRowView(model: model)
-                    .padding()
+                    .padding(.bottom,10)
+                    
             }
         }
     }
@@ -29,7 +30,7 @@ struct DayRowView: View{
         
         HStack{
             
-            Spacer()
+           
             
             Text(model.Day)
                 .bold()
@@ -41,12 +42,20 @@ struct DayRowView: View{
             
             HStack{
                 Spacer()
-                Image(systemName: model.imageURL)
-                    .renderingMode(.original)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 35 , height: 35, alignment: .center)
-                
+                VStack{
+                    Image(systemName: model.imageURL)
+                        .renderingMode(.original)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 30 , height: 30, alignment: .center)
+                    
+                    if model.pop > 10 {
+                        Text("\(model.pop)% ")
+                            .foregroundColor(.cyan)
+                    }
+                    
+                }
+      
                 Spacer()
               
                 Text("H:\(model.High) ")

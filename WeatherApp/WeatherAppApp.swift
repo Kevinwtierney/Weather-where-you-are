@@ -13,6 +13,9 @@ struct WeatherAppApp: App {
         WindowGroup {
             let viewModel = WeatherViewModel()
             ContentView().environmentObject(viewModel)
+                
+            
         }
+        
     }
 }

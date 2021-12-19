@@ -26,6 +26,7 @@ struct HourlyModel: Codable{
     let dt: Double
     let temp : Double
     let weather : [Info]
+    let pop: Double
 }
 
 struct Info: Codable{
@@ -40,6 +41,7 @@ struct DayModel: Codable{
     let dt: Double
     let temp : Temp
     let weather : [Info]
+    let pop: Double
 }
 
 struct Temp: Codable{

@@ -18,6 +18,9 @@ struct HeaderView: View{
                 .foregroundColor(.white)
                 .font(.system(size: 36))
                 .padding()
+            Text("Tap anywhere to Refresh")
+                .foregroundColor(.white)
+                .padding(.bottom,3)
             
             Image(systemName: viewModel.headerViewModel.conditionImage)
                 .renderingMode(.original)

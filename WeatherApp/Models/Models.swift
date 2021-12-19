@@ -75,8 +75,9 @@ class WeatherViewModel: ObservableObject {
         }
        return conditionname
     }
-    
+
     func fetchData(){
+        
         
         LocationManager.shared.getLocation { location in
             LocationManager.shared.resolveName(for: CLLocation(latitude: location.lat, longitude: location.lon)) { name in
@@ -90,6 +91,7 @@ class WeatherViewModel: ObservableObject {
               guard let url = URL(string: urlString) else{
                   return
               }
+            print(url)
               
               let task = URLSession.shared.dataTask(with: url){ data,  _, error in
                   guard let data = data, error == nil else{
@@ -118,6 +120,7 @@ class WeatherViewModel: ObservableObject {
                               let currentTime = result.current.dt
                               data.High = "\(Int($0.temp.max))°F"
                               data.Low = "\(Int($0.temp.min))°F"
+                              data.pop = Int($0.pop * 100)
                               if String.dayNumber(from: $0.dt) == String.dayNumber(from: currentTime) {
                                   data.Day = "Today"
                               }
@@ -134,6 +137,7 @@ class WeatherViewModel: ObservableObject {
                               let data = HourData()
                               let currentTime = result.current.dt
                               data.temp  = "\(Int($0.temp))°"
+                              data.pop = Int($0.pop * 100)
                               if String.hour(from: $0.dt) == String.hour(from: currentTime){
                                   data.hour = "Now"
                               }
@@ -144,6 +148,7 @@ class WeatherViewModel: ObservableObject {
                               data.imageURL = self.getImage(conditionId: $0.weather.first?.id ?? 200, time:$0.dt)
                               return data
                           })
+                          print("refreshed")
                       }
                      
                       return
@@ -181,6 +186,7 @@ class HourData: ObservableObject, Identifiable {
     var temp = "75°"
     var hour = "6PM"
     var imageURL = "cloud.sun.fill"
+    var pop = 50
 }
 
 // MARK: - Daily
@@ -191,4 +197,5 @@ class DayData: ObservableObject,Identifiable {
     var High = "72°"
     var Low = "55°"
     var imageURL = "cloud.sun.fill"
+    var pop = 50
 }

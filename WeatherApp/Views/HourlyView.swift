@@ -31,19 +31,24 @@ struct HourView: View {
     var body: some View{
         
         VStack{
+            
+            Text(model.hour)
+                .foregroundColor(.white)
           
             Image(systemName: model.imageURL)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 35 , height: 35, alignment: .center)
+                .frame(width: 30 , height: 30, alignment: .center)
+              
+            
+            if model.pop > 10 {
+                Text("\(model.pop)% ")
+                    .foregroundColor(.cyan)
+                    .padding(.bottom,3)
+            }
             
             Text(model.temp)
-                .foregroundColor(.white)
-                .bold()
-                
-            
-            Text(model.hour)
                 .foregroundColor(.white)
             
         }
